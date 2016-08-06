@@ -8,10 +8,7 @@ const userSchema = new mongoose.Schema({
   email: {type: String, unique: true, required: true},
   password: {type: String, required: true},
   auth_token: {type: String, unique: true},
-  budget: Number,
-  current_amount: Number,
-  bankrupt: Boolean,
-  progress: Number
+  monthly_income: {type: Number, required: true}
 })
 
 userSchema.pre('save', function (next) {
