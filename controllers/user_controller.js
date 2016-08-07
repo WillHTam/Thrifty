@@ -1,5 +1,4 @@
 const User = require('../models/user')
-const Resource = require('../models/resources')
 
 function userRegister (req, res, next) {
   const user = new User(req.body)

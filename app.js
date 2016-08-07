@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 mongoose.connect(process.env.MONGODB_URI)
 
 const logger = require('morgan')
-const userController = require('./controllers/user_controller.')
+const userController = require('./controllers/user_controller')
 const port = process.env.PORT || 3000
 var routes = require('./routes/index')
 
