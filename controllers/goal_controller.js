@@ -44,13 +44,14 @@ function newGoal (req, res) {
 }
 
 function updateGoal (req, res) {
+  const goalid = req.get('id')
   const userEmail = req.get('email')
   const authToken = req.get('auth_token')
 
   User.findOne({email: userEmail}, (err, user) => {
     if (err || !user) return res.status(401).json({error: 'Unable to find user'})
 
-    Goal.findById(req.body.id, (err, goal) => {
+    Goal.findById(goalid, (err, goal) => {
       if (err) return res.status(401).json({error: 'Cannot find goal.'})
       goal.name = req.body.name || goal.name
       goal.cost = req.body.cost || goal.cost
