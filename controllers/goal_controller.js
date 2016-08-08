@@ -29,16 +29,18 @@ function showUserGoals (req, res) {
 }
 
 function newGoal (req, res) {
+  console.log(req.body)
   var goal = new Goal(req.body)
   const userEmail = req.get('email')
 
   User.findOne({email: userEmail}, (err, user) => {
     if (err || !user) return res.status(401).json({error: 'Unable to find user'})
-  })
-
-  Goal.save((err, goal) => {
-    if (err) return res.status(401).json({error: 'Error saving goal!'})
-    res.status(201).json({message: 'Goal created!', goal})
+    goal.user = user
+    goal.save((err, goal) => {
+      console.log('goal sent:' + goal)
+      if (err) return res.status(401).json({error: 'Error saving goal!'})
+      res.status(201).json({message: 'Goal created!', goal})
+    })
   })
 
 }
