@@ -12,20 +12,37 @@ router.get('/', function (req, res, next) {
   res.render('../views/index.ejs')
 })
 
-router.post('/newgoal', goalController.newGoal)
+// USERS
 
-/* POST new user */
+/* ADD NEW user */
 router.post('/register', userController.userRegister)
 
-/* EDIT new user get started (after registration) */
+/* ADD user monthly income, on get started page (after registration) */
 router.post('/getstarted', userController.editUser)
+
 /* EDIT user account */
 router.put('/account', userController.editUser)
 
 // User LOGIN
 router.post('/login', userController.userLogIn)
 
-// posts !!AND!! user DELETE
+// DELETE user
 router.delete('/deleteUser', userController.deleteUser)
+
+
+// GOALS
+
+// ADD NEW goal
+router.post('/newgoal', goalController.newGoal)
+
+// UPDATE goal profile
+router.put('/editgoal', goalController.updateGoal)
+
+// UPDATE goal plan
+router.put('/editgoalplan', goalController.updateGoal)
+
+// DELETE  goal
+router.delete('/newgoal', goalController.deleteGoal)
+
 
 module.exports = router
