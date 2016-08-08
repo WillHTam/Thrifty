@@ -9,8 +9,6 @@ var request = require('request-json')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-var apiKey = '4b84966e00cc466888753c7cf04df00f'
-
 function showAllGoals (req, res, err) {
   Goal.find({}, function (err, goals) {
     res.status(200).json(goals)
@@ -33,6 +31,12 @@ function seeMyGoals (req, res) {
 function makeNewGoal (req, res) {
   var goal = new Goal(req.body)
   const userEmail = req.get('email')
+  goal.name = req.body.name || goal.name
+  goal.cost = req.body.cost || goal.cost
+  goal.time_left = req.body.time_left
+  goal.amount_left = req.body.amount_left || goal.amount_left
+  goal.monthly_budget = req.body.monthly_budget || goal.monthly_budget
+  goal.icon = req.body.icon || goal.icon
 
   User.findOne({email: userEmail}, (err, user) => {
     if (err || !user) return res.status(401).json({error: 'Unable to find user'})
