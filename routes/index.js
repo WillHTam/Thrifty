@@ -15,7 +15,8 @@ router.get('/', function (req, res, next) {
 router.post('/register', applicationController.userRegister)
 
 /* EDIT user */
-router.put('/user', applicationController.editUser)
+router.post('/getstarted', applicationController.editUser)
+router.put('/account', applicationController.editUser)
 
 // User LOGIN
 router.post('/login', applicationController.userLogIn)

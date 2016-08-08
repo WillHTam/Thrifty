@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 
-const itemSchema = new mongoose.Schema({
+const goalSchema = new mongoose.Schema({
   user: {type: mongoose.Schema.ObjectId, required: true, ref: 'User'},
+  icon: String,
   name: String,
   cost: Number,
   time_left: Number,
@@ -9,6 +10,6 @@ const itemSchema = new mongoose.Schema({
   monthly_budget: Number
 })
 
-const Item = mongoose.model('Item', itemSchema)
+const Goal = mongoose.model('Goal', goalSchema)
 
-module.exports = Item
+module.exports = Goal
