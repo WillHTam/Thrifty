@@ -41,12 +41,15 @@ function userLoggedIn (req, res, next) {
 // }
 
 function editUser(req, res, next) {
-  User.findOne({auth_token: req.get('auth_token')}, (err, user) => {
+  const userEmail = req.get('email')
+  const authToken = req.get('auth_token')
+
+  User.findOne({email: userEmail, auth_token: authToken}, (err, user) => {
     if (err) res.status(401).json({error: 'Cannot find user'})
     else {
-      user.email = req.body.email
-      user.password = req.body.password
-      user.monthly_income = req.body.monthly_income
+      user.email = req.body.email || user.email
+      user.password = req.body.password || user.password
+      user.monthly_income = req.body.monthly_income || user.monthly_income
       user.save( function(err) {
         if (err) res.status(400).json({error: 'Cannot save user'})
         else {
