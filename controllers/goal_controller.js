@@ -1,4 +1,4 @@
-const Goal = require('../models/goals')
+const Goal = require('../models/goal')
 const User = require('../models/user')
 
 const express = require('express')
@@ -15,12 +15,12 @@ function showAllGoals (req, res, err) {
   })
 }
 
-function seeMyGoals (req, res) {
+function showUserGoals (req, res) {
   const userEmail = req.get('email')
   const authToken = req.get('auth_token')
   // const userParams = new User(req.body)
   User.findOne({email: userEmail}, function (err, user) {
-    if (err) return res.status(401).json({error: 'ERROR! ERROR!'})
+    if (err) return res.status(401).json({error: 'ERROR! User not found.'})
     Goal.find({user}, function (err, goal) {
       if (err) return res.status(401).json({error: 'Error finding goal'})
       res.status(200).json(goal)
@@ -28,7 +28,7 @@ function seeMyGoals (req, res) {
   })
 }
 
-function makeNewGoal (req, res) {
+function newGoal (req, res) {
   var goal = new Goal(req.body)
   const userEmail = req.get('email')
   goal.name = req.body.name
@@ -43,15 +43,15 @@ function makeNewGoal (req, res) {
   })
 
   goal.save((err, goal) => {
-    if (err) return res.status(401).json({error: 'error!'})
-    res.status(201).json({message: 'Goal created', goal})
+    if (err) return res.status(401).json({error: 'Error saving goal!'})
+    res.status(201).json({message: 'Goal created!', goal})
   })
 
 }
 
 function updateGoal (req, res) {
   Goal.findById(req.body.id, (err, goal) => {
-    if (err) return res.status(401).json({error: 'Cannot find goal'})
+    if (err) return res.status(401).json({error: 'Cannot find goal.'})
     goal.name = req.body.name || goal.name
     goal.cost = req.body.cost || goal.cost
     goal.time_left = req.body.time_left
@@ -85,10 +85,9 @@ function deleteGoal (req, res, err) {
 }
 
 module.exports = {
-  showAllResources: showAllResources,
-  seeMyResources: seeMyResources,
-  makeNewResource: makeNewResource,
-  updateResource: updateResource,
-  deleteResource: deleteResource,
-  reqInstaparser: reqInstaparser
+  showAllGoals: showAllGoals,
+  seeUserGoals: seeUserGoals,
+  newGoal: newGoal,
+  updateGoal: updateGoal,
+  deleteGoal: deleteGoal,
 }
