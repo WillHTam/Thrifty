@@ -31,12 +31,6 @@ function showUserGoals (req, res) {
 function newGoal (req, res) {
   var goal = new Goal(req.body)
   const userEmail = req.get('email')
-  goal.name = req.body.name
-  goal.cost = req.body.cost
-  goal.time_left = req.body.time_left
-  goal.amount_left = req.body.amount_left
-  goal.monthly_budget = req.body.monthly_budget
-  goal.icon = req.body.icon
 
   User.findOne({email: userEmail}, (err, user) => {
     if (err || !user) return res.status(401).json({error: 'Unable to find user'})
