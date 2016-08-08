@@ -59,7 +59,7 @@ function editUser(req, res, next) {
 
 function deleteUser (req, res, next) {
   const userEmail = req.body.user.email
-  User.findOne({email: userEmail}, (err, user) => {
+  User.findOne({auth_token: req.get('auth_token')}, (err, user) => {
     if (err || !user) return res.status(401).json({error: 'Email or password is invalid'})
     Goal.find({user}).remove().exec()
     user.remove()
