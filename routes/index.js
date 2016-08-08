@@ -42,7 +42,7 @@ router.put('/editgoal', goalController.updateGoal)
 router.put('/editgoalplan', goalController.updateGoal)
 
 // DELETE  goal
-router.delete('/newgoal', goalController.deleteGoal)
+router.delete('/deletegoal', goalController.deleteGoal)
 
 
 module.exports = router
