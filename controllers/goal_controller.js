@@ -32,6 +32,7 @@ function newGoal (req, res) {
   console.log(req.body)
   var goal = new Goal(req.body)
   const userEmail = req.get('email')
+  const authToken = req.get('auth_token')
 
   User.findOne({email: userEmail}, (err, user) => {
     if (err || !user) return res.status(401).json({error: 'Unable to find user'})
@@ -44,18 +45,26 @@ function newGoal (req, res) {
 }
 
 function updateGoal (req, res) {
-  Goal.findById(req.body.id, (err, goal) => {
-    if (err) return res.status(401).json({error: 'Cannot find goal.'})
-    goal.name = req.body.name || goal.name
-    goal.cost = req.body.cost || goal.cost
-    goal.time_left = req.body.time_left
-    goal.amount_left = req.body.amount_left || goal.amount_left
-    goal.monthly_budget = req.body.monthly_budget || goal.monthly_budget
-    goal.icon = req.body.icon || goal.icon
-    goal.save((err) => {
-      if (err) return res.status(401).json({error: err})
-      res.status(200).json({message: 'Goal updated', goal})
+  const userEmail = req.get('email')
+  const authToken = req.get('auth_token')
+
+  User.findOne({email: userEmail}, (err, user) => {
+    if (err || !user) return res.status(401).json({error: 'Unable to find user'})
+
+    Goal.findById(req.body.id, (err, goal) => {
+      if (err) return res.status(401).json({error: 'Cannot find goal.'})
+      goal.name = req.body.name || goal.name
+      goal.cost = req.body.cost || goal.cost
+      goal.time_left = req.body.time_left
+      goal.amount_left = req.body.amount_left || goal.amount_left
+      goal.monthly_budget = req.body.monthly_budget || goal.monthly_budget
+      goal.icon = req.body.icon || goal.icon
+      goal.save((err) => {
+        if (err) return res.status(401).json({error: err})
+        res.status(200).json({message: 'Goal updated', goal})
+      })
     })
+
   })
 }
 
