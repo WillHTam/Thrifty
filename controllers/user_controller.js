@@ -47,6 +47,8 @@ function editUser(req, res, next) {
   User.findOne({email: userEmail, auth_token: authToken}, (err, user) => {
     if (err) res.status(401).json({error: 'Cannot find user'})
     else {
+      user.first_name = req.body.first_name || user.first_name
+      user.last_name = req.body.last_name || user.last_name
       user.email = req.body.email || user.email
       user.password = req.body.password || user.password
       user.monthly_income = req.body.monthly_income || user.monthly_income
