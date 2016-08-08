@@ -33,11 +33,11 @@ function userLoggedIn (req, res, next) {
   })
 }
 
-function userFind (req, res, next) {
-  User.findOne({first_name: 'Justin'}, (err, user) => {
-    if (err || !user) return res.status(401).json({error: 'Cannot find user'})
-  })
-}
+// function userFind (req, res, next) {
+//   User.findOne({first_name: 'Justin'}, (err, user) => {
+//     if (err || !user) return res.status(401).json({error: 'Cannot find user'})
+//   })
+// }
 
 function editUser(req, res, next) {
   User.findOne({auth_token: req.get('auth_token')}, (err, user) => {
@@ -58,10 +58,14 @@ function editUser(req, res, next) {
 }
 
 function deleteUser (req, res, next) {
-  const userEmail = req.body.user.email
   User.findOne({auth_token: req.get('auth_token')}, (err, user) => {
     if (err || !user) return res.status(401).json({error: 'Email or password is invalid'})
+
+    // removes goals if any exist
+    if (Goal.find({user})) {
     Goal.find({user}).remove().exec()
+    }
+
     user.remove()
     res.status(200).json({message: 'User and Goals deleted'})
     next()
@@ -71,7 +75,6 @@ function deleteUser (req, res, next) {
 module.exports = {
   userRegister: userRegister,
   userLogIn: userLogIn,
-  userFind: userFind,
   userLoggedIn: userLoggedIn,
   editUser: editUser,
   deleteUser: deleteUser
