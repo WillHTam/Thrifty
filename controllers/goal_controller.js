@@ -42,7 +42,6 @@ function newGoal (req, res) {
       res.status(201).json({message: 'Goal created!', goal})
     })
   })
-
 }
 
 function updateGoal (req, res) {

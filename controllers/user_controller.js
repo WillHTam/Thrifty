@@ -1,3 +1,4 @@
+//merge fix
 const User = require('../models/user')
 
 function userRegister (req, res, next) {
