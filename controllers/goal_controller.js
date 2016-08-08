@@ -36,7 +36,6 @@ function newGoal (req, res) {
     if (err || !user) return res.status(401).json({error: 'Unable to find user'})
     goal.user = user
     goal.save((err, goal) => {
-      console.log("Goal sent: " + goal)
       if (err) return res.status(401).json({error: 'Error saving goal!'})
       res.status(201).json({message: 'Goal created!', goal})
     })
