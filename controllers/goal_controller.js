@@ -86,7 +86,7 @@ function deleteGoal (req, res, err) {
 
 module.exports = {
   showAllGoals: showAllGoals,
-  seeUserGoals: seeUserGoals,
+  showUserGoals: showUserGoals,
   newGoal: newGoal,
   updateGoal: updateGoal,
   deleteGoal: deleteGoal,
