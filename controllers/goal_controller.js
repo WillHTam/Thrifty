@@ -29,7 +29,6 @@ function showUserGoals (req, res) {
 }
 
 function newGoal (req, res) {
-  console.log(req.body)
   var goal = new Goal(req.body)
   const userEmail = req.get('email')
   const authToken = req.get('auth_token')
