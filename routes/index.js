@@ -31,6 +31,9 @@ router.delete('/deleteuser', userController.deleteUser)
 
 // GOALS
 
+// GET my (and only my) GOALS
+router.get('/mygoals', goalController.showUserGoals)
+
 // ADD NEW goal
 router.post('/newgoal', goalController.newGoal)
 
