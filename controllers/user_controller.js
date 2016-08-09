@@ -1,5 +1,6 @@
 //merge fix
 const User = require('../models/user')
+const Goal = require('../models/goal')
 
 function userRegister (req, res, next) {
   const user = new User(req.body)
@@ -64,7 +65,10 @@ function editUser(req, res, next) {
 }
 
 function deleteUser (req, res, next) {
-  User.findOne({auth_token: req.get('auth_token')}, (err, user) => {
+  const userEmail = req.get('email')
+  const authToken = req.get('auth_token')
+
+  User.findOne({email: userEmail, auth_token: authToken}, (err, user) => {
     if (err || !user) return res.status(401).json({error: 'Email or password is invalid'})
 
     // removes goals if any exist

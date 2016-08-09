@@ -7,7 +7,7 @@ mongoose.connect(process.env.MONGODB_URI)
 
 const logger = require('morgan')
 const userController = require('./controllers/user_controller')
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 4200
 var routes = require('./routes/index')
 
 const app = express()

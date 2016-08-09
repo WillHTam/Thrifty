@@ -27,8 +27,7 @@ router.put('/account', userController.editUser)
 router.post('/login', userController.userLogIn)
 
 // DELETE user
-router.delete('/deleteUser', userController.deleteUser)
-
+router.delete('/deleteuser', userController.deleteUser)
 
 // GOALS
 
