@@ -5,7 +5,7 @@ function userRegister (req, res, next) {
   const user = new User(req.body)
   user.save((err, user) => {
     if (err) return res.status(401).json({error: 'ERROR! Could not create user.'})
-    res.status(201).json({message: 'User created.', auth_token: user.auth_token})
+    res.status(201).json({message: 'User created.', email: user.email, auth_token: user.auth_token})
     next()
   })
 }
