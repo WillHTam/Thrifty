@@ -2,6 +2,15 @@
 const User = require('../models/user')
 const Goal = require('../models/goal')
 
+function whoMe (req, res, next) {
+  const userMail = req.get('email')
+  const authToken = req.get('auth_token')
+  User.findOne({email: userMail, auth_token: authToken}, function (err, user) {
+    if (err) return res.status(401).json({error: 'ERROR! User not found.'})
+    res.status(200).json(user)
+  })
+}
+
 function userRegister (req, res, next) {
   const user = new User(req.body)
   user.save((err, user) => {
@@ -83,6 +92,7 @@ function deleteUser (req, res, next) {
 }
 
 module.exports = {
+  whoMe: whoMe,
   userRegister: userRegister,
   userLogIn: userLogIn,
   userLoggedIn: userLoggedIn,

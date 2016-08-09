@@ -14,6 +14,9 @@ router.get('/', function (req, res, next) {
 
 // USERS
 
+// GET my details from auth_token
+router.get('/me', userController.whoMe)
+
 /* ADD NEW user */
 router.post('/register', userController.userRegister)
 
