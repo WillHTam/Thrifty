@@ -78,7 +78,7 @@ function getOneGoal (req, res, err) {
 
 function editOneGoal (req, res, err) {
   const id = req.params.id
-  Goal.find({_id: id}, function (err, goal) {
+  Goal.findOne({_id: id}, function (err, goal) {
     if (err) return res.status.json({error: 'edit goal failed'})
     goal.name = req.body.name || goal.name
     goal.cost = req.body.cost || goal.cost
@@ -86,16 +86,17 @@ function editOneGoal (req, res, err) {
     goal.amount_left = req.body.amount_left || goal.amount_left
     goal.monthly_budget = req.body.monthly_budget || goal.monthly_budget
     goal.icon = req.body.icon || goal.icon
-    goal.save((err) => {
+    console.log('goal'+goal)
+    goal.save( function (err) {
       if (err) return res.status(401).json({error: err})
-      res.status(200).json({message: 'Goal updated', goal})
+      else res.status(201).json({message: 'Goal updated'})
     })
   })
 }
 
 function deleteOneGoal (req, res, err) {
   const id = req.params.id
-  Goal.find({_id: id}, function (err, goal) {
+  Goal.findOne({_id: id}, function (err, goal) {
     if (err) return res.status.json({error: 'deleteOneGoal failed'})
     goal.remove()
     res.status(200).json({message: 'Goal deleted'})
