@@ -49,5 +49,4 @@ router.put('/editgoalplan', goalController.updateGoal)
 // DELETE  goal
 router.delete('/deletegoal', goalController.deleteGoal)
 
-
 module.exports = router
