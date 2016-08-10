@@ -71,12 +71,36 @@ function updateGoal (req, res) {
 function getOneGoal (req, res, err) {
   const id = req.params.id
   Goal.find({_id: id}, function (err, goal) {
-    if (err) return res.status.json({error: 'get one goal failed'})
+    if (err) return res.status.json({error: 'getOneGoal failed'})
     res.status(200).json(goal)
   })
 }
-// function editOneGoal
-// function deleteOneGoal
+
+function editOneGoal (req, res, err) {
+  const id = req.params.id
+  Goal.find({_id: id}, function (err, goal) {
+    if (err) return res.status.json({error: 'edit goal failed'})
+    goal.name = req.body.name || goal.name
+    goal.cost = req.body.cost || goal.cost
+    goal.time_left = req.body.time_left
+    goal.amount_left = req.body.amount_left || goal.amount_left
+    goal.monthly_budget = req.body.monthly_budget || goal.monthly_budget
+    goal.icon = req.body.icon || goal.icon
+    goal.save((err) => {
+      if (err) return res.status(401).json({error: err})
+      res.status(200).json({message: 'Goal updated', goal})
+    })
+  })
+}
+
+function deleteOneGoal (req, res, err) {
+  const id = req.params.id
+  Goal.find({_id: id}, function (err, goal) {
+    if (err) return res.status.json({error: 'deleteOneGoal failed'})
+    goal.remove()
+    res.status(200).json({message: 'Goal deleted'})
+  })
+}
 
 function deleteGoal (req, res, err) {
   const goalid = req.get('id')
@@ -103,5 +127,7 @@ module.exports = {
   newGoal: newGoal,
   updateGoal: updateGoal,
   deleteGoal: deleteGoal,
-  getOneGoal: getOneGoal
+  getOneGoal: getOneGoal,
+  editOneGoal: editOneGoal,
+  deleteOneGoal: deleteOneGoal
 }
