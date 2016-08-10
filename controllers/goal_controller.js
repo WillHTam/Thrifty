@@ -86,7 +86,6 @@ function editOneGoal (req, res, err) {
     goal.amount_left = req.body.amount_left || goal.amount_left
     goal.monthly_budget = req.body.monthly_budget || goal.monthly_budget
     goal.icon = req.body.icon || goal.icon
-    console.log('goal'+goal)
     goal.save( function (err) {
       if (err) return res.status(401).json({error: err})
       else res.status(201).json({message: 'Goal updated'})
