@@ -7,7 +7,18 @@ const goalSchema = new mongoose.Schema({
   cost: Number,
   time_left: Number,
   amount_left: Number,
-  monthly_budget: Number
+  monthly_budget: Number,
+  created_at: Date,
+  updated_at: Date
+})
+
+goalSchema.pre('save', function (next) {
+  let now = new Date()
+  this.updated_at = now
+  if (!this.created_at) {
+    this.created_at = now
+  }
+  next()
 })
 
 const Goal = mongoose.model('Goal', goalSchema)
