@@ -68,6 +68,16 @@ function updateGoal (req, res) {
   })
 }
 
+function getOneGoal (req, res, err) {
+  const id = req.params.id
+  Goal.find({_id: id}, function (err, goal) {
+    if (err) return res.status.json({error: 'get one goal failed'})
+    res.status(200).json(goal)
+  })
+}
+// function editOneGoal
+// function deleteOneGoal
+
 function deleteGoal (req, res, err) {
   const goalid = req.get('id')
   const userEmail = req.get('email')
@@ -93,4 +103,5 @@ module.exports = {
   newGoal: newGoal,
   updateGoal: updateGoal,
   deleteGoal: deleteGoal,
+  getOneGoal: getOneGoal
 }
