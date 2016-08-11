@@ -56,7 +56,7 @@ function updateGoal (req, res) {
       goal.name = req.body.name || goal.name
       goal.cost = req.body.cost || goal.cost
       goal.time_left = req.body.time_left
-      goal.amount_left = req.body.amount_left || goal.amount_left
+      goal.amount_saved = req.body.amount_saved || goal.amount_saved
       goal.monthly_budget = req.body.monthly_budget || goal.monthly_budget
       goal.icon = req.body.icon || goal.icon
       goal.save((err) => {
@@ -83,7 +83,7 @@ function editOneGoal (req, res, err) {
     goal.name = req.body.name || goal.name
     goal.cost = req.body.cost || goal.cost
     goal.time_left = req.body.time_left
-    goal.amount_left = req.body.amount_left || goal.amount_left
+    goal.amount_saved = req.body.amount_saved || goal.amount_saved
     goal.monthly_budget = req.body.monthly_budget || goal.monthly_budget
     goal.icon = req.body.icon || goal.icon
     goal.save( function (err) {

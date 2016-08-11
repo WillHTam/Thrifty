@@ -6,7 +6,7 @@ const goalSchema = new mongoose.Schema({
   name: String,
   cost: Number,
   time_left: Number,
-  amount_left: Number,
+  amount_saved: Number,
   monthly_budget: Number,
   created_at: Date,
   updated_at: Date

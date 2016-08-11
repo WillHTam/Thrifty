@@ -44,12 +44,6 @@ function userLoggedIn (req, res, next) {
   })
 }
 
-// function userFind (req, res, next) {
-//   User.findOne({first_name: 'Justin'}, (err, user) => {
-//     if (err || !user) return res.status(401).json({error: 'Cannot find user'})
-//   })
-// }
-
 function editUser(req, res, next) {
   const userEmail = req.get('email')
   const authToken = req.get('auth_token')
