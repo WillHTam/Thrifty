@@ -56,6 +56,7 @@ function editUser(req, res, next) {
       user.email = req.body.email || user.email
       user.password = req.body.password || user.password
       user.monthly_income = req.body.monthly_income || user.monthly_income
+      user.available_income = req.body.available_income || user.available_income
       user.save( function(err) {
         if (err) res.status(400).json({error: 'Cannot save user'})
         else {
