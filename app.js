@@ -28,7 +28,7 @@ app.use(function (req, res, next) {
 app.use('/', routes)
 
 app.listen(port, () => {
-  console.log('Connected, dog.')
+	console.log(`Connected to ${port}`)
 })
 
 module.exports = app
